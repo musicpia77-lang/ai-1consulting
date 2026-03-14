@@ -20,7 +20,6 @@
   }
 
   * { margin: 0; padding: 0; box-sizing: border-box; }
-
   html { scroll-behavior: smooth; }
 
   body {
@@ -126,6 +125,7 @@
     color: var(--ink-light);
     opacity: 0;
     animation: fadeUp 0.6s 0.65s forwards;
+    flex-wrap: wrap;
   }
 
   .hero-meta span {
@@ -231,42 +231,66 @@
     margin-bottom: 32px;
   }
 
-  .checklist {
-    list-style: none;
+  /* pain card grid */
+  .pain-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+    margin-bottom: 40px;
+  }
+
+  .pain-card {
+    background: var(--card);
+    border: 1px solid var(--line);
+    border-radius: 20px;
+    padding: 24px 20px;
     display: flex;
     flex-direction: column;
-    gap: 0;
-    margin-bottom: 40px;
-    border: 1.5px solid var(--line);
-    border-radius: 16px;
-    overflow: hidden;
-  }
-
-  .checklist li {
-    display: flex;
-    align-items: flex-start;
     gap: 14px;
-    padding: 18px 24px;
-    font-size: 15px;
-    line-height: 1.6;
-    border-bottom: 1.5px solid var(--line);
-    background: var(--card);
-    transition: background 0.2s;
+    transition: background 0.25s, border-color 0.25s, box-shadow 0.25s;
+    cursor: default;
+    box-shadow: 0 1px 4px rgba(0,0,0,0.04);
   }
 
-  .checklist li:last-child { border-bottom: none; }
-  .checklist li:hover { background: var(--accent-soft); }
-
-  .check-icon {
-    width: 22px; height: 22px;
-    min-width: 22px;
+  .pain-card:hover {
     background: var(--accent-soft);
-    border-radius: 6px;
+    border-color: rgba(232,98,26,0.2);
+    box-shadow: 0 6px 24px rgba(232,98,26,0.08);
+  }
+
+  .pain-num {
+    width: 28px; height: 28px;
+    min-width: 28px;
+    border: 1.5px solid var(--accent);
+    color: var(--accent);
+    border-radius: 50%;
     display: flex;
     align-items: center;
     justify-content: center;
-    margin-top: 2px;
     font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 0;
+    line-height: 1;
+    font-family: 'Playfair Display', serif;
+    font-style: italic;
+  }
+
+  .pain-card p {
+    font-size: 14px;
+    line-height: 1.65;
+    color: var(--ink);
+    word-break: keep-all;
+  }
+
+  .pain-card p strong {
+    color: var(--accent);
+    font-weight: 700;
+  }
+
+  @media (max-width: 400px) {
+    .pain-grid {
+      grid-template-columns: 1fr;
+    }
   }
 
   .insight-box {
@@ -296,9 +320,7 @@
     position: relative;
   }
 
-  .insight-box strong {
-    color: #FFB347;
-  }
+  .insight-box strong { color: #FFB347; }
 
   /* ── CREDENTIALS ── */
   .creds-section {
@@ -500,9 +522,7 @@
     font-weight: 500;
   }
 
-  .pricing-amount {
-    margin-bottom: 32px;
-  }
+  .pricing-amount { margin-bottom: 32px; }
 
   .pricing-amount .amount {
     font-size: 48px;
@@ -579,52 +599,6 @@
     margin-top: 14px;
   }
 
-  /* ── KAKAO ── */
-  .kakao-section {
-    padding: 0 24px 80px;
-  }
-
-  .kakao-card {
-    background: #FEE500;
-    border-radius: 20px;
-    padding: 32px 28px;
-    text-align: center;
-    max-width: 680px;
-    margin: 0 auto;
-  }
-
-  .kakao-card .emoji { font-size: 32px; margin-bottom: 12px; }
-
-  .kakao-card h3 {
-    font-size: 18px;
-    font-weight: 700;
-    color: #1A1A1A;
-    margin-bottom: 8px;
-  }
-
-  .kakao-card p {
-    font-size: 14px;
-    color: #555;
-    margin-bottom: 20px;
-    line-height: 1.6;
-  }
-
-  .btn-kakao {
-    display: inline-flex;
-    align-items: center;
-    gap: 8px;
-    background: #3A1D1D;
-    color: white;
-    font-size: 15px;
-    font-weight: 700;
-    padding: 14px 28px;
-    border-radius: 12px;
-    text-decoration: none;
-    transition: all 0.2s;
-  }
-
-  .btn-kakao:hover { opacity: 0.85; }
-
   /* ── FOOTER ── */
   footer {
     padding: 32px 24px;
@@ -632,6 +606,50 @@
     text-align: center;
     font-size: 13px;
     color: var(--ink-light);
+  }
+
+  .btn-kakao-hero {
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+    background: #FEE500;
+    color: #1A1A1A;
+    font-size: 15px;
+    font-weight: 700;
+    padding: 17px 22px;
+    border-radius: 14px;
+    text-decoration: none;
+    transition: all 0.2s;
+    box-shadow: 0 4px 16px rgba(254,229,0,0.4);
+    white-space: nowrap;
+  }
+
+  .btn-kakao-hero:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 24px rgba(254,229,0,0.5);
+  }
+
+  .btn-kakao-pricing {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    background: #FEE500;
+    color: #1A1A1A;
+    font-size: 15px;
+    font-weight: 700;
+    padding: 16px 32px;
+    border-radius: 14px;
+    text-decoration: none;
+    transition: all 0.2s;
+    width: 100%;
+    margin-top: 12px;
+    box-shadow: 0 4px 16px rgba(254,229,0,0.25);
+  }
+
+  .btn-kakao-pricing:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 24px rgba(254,229,0,0.4);
   }
 
   /* ── ANIMATIONS ── */
@@ -662,15 +680,11 @@
 
   /* ── RESPONSIVE ── */
   @media (min-width: 600px) {
-    .review-grid {
-      grid-template-columns: 1fr 1fr;
-    }
+    .review-grid { grid-template-columns: 1fr 1fr; }
   }
 
   @media (max-width: 360px) {
-    .cred-grid {
-      grid-template-columns: 1fr;
-    }
+    .cred-grid { grid-template-columns: 1fr; }
   }
 </style>
 </head>
@@ -693,12 +707,15 @@
       <span>1:1 맞춤 설계</span>
     </div>
     <div class="cta-wrap">
-      <a href="#pricing" class="btn-primary">
-        신청하기 →
-      </a>
-      <a href="#what" class="btn-secondary">
-        어떤 시간인지 먼저 볼게요 ↓
-      </a>
+      <div style="display: flex; gap: 12px; flex-wrap: wrap; align-items: center;">
+        <a href="#pricing" class="btn-primary">신청하기 →</a>
+        <a href="https://open.kakao.com/o/swpZanli" target="_blank" class="btn-kakao-hero">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" style="flex-shrink:0;"><path d="M12 3C6.477 3 2 6.477 2 10.5c0 2.607 1.554 4.908 3.938 6.315L4.5 21l4.656-2.328A11.61 11.61 0 0012 18c5.523 0 10-3.477 10-7.5S17.523 3 12 3z"/></svg>
+          카카오로 문의하기
+        </a>
+      </div>
+      <p style="font-size: 13px; color: var(--ink-light); margin-top: 4px;">수강 전 궁금한 거 있으면 편하게 물어보세요 😊</p>
+      <a href="#what" class="btn-secondary">어떤 시간인지 먼저 볼게요 ↓</a>
     </div>
   </div>
   <div class="scroll-hint">
@@ -711,24 +728,24 @@
   <div class="section-inner">
     <p class="section-label reveal">혹시 이런 분이세요?</p>
     <h2 class="reveal">AI가 좋다는 건<br>아는데…</h2>
-    <ul class="checklist reveal">
-      <li>
-        <div class="check-icon">☑</div>
-        AI가 좋다는데, 정작 <strong>내 업무에 어떻게 쓰는지</strong> 모르겠다
-      </li>
-      <li>
-        <div class="check-icon">☑</div>
-        챗GPT 가입하고 <strong>검색용으로만</strong> 쓴다
-      </li>
-      <li>
-        <div class="check-icon">☑</div>
-        유튜브, 인스타 강의 많이 봤는데 <strong>내 상황에 딱 맞는 답을</strong>못 찾겠다
-      </li>
-      <li>
-        <div class="check-icon">☑</div>
-        AI 쓰고 싶은데 <strong>어디서부터 시작할지</strong> 모르겠다
-      </li>
-    </ul>
+    <div class="pain-grid reveal">
+      <div class="pain-card">
+        <div class="pain-num">1</div>
+        <p>AI가 좋다는데, 정작<br><strong>내 업무에 어떻게 쓰는지</strong><br>모르겠다</p>
+      </div>
+      <div class="pain-card">
+        <div class="pain-num">2</div>
+        <p>챗GPT 가입하고<br><strong>검색용으로만</strong><br>쓴다</p>
+      </div>
+      <div class="pain-card">
+        <div class="pain-num">3</div>
+        <p>유튜브, 인스타 강의 많이 봤는데<br><strong>내 상황에 딱 맞는 답을</strong><br>못 찾겠다</p>
+      </div>
+      <div class="pain-card">
+        <div class="pain-num">4</div>
+        <p>AI 쓰고 싶은데<br><strong>어디서부터 시작할지</strong><br>모르겠다</p>
+      </div>
+    </div>
     <div class="insight-box reveal">
       <p>
         사실 이게 당연한 거예요.<br>
@@ -819,7 +836,7 @@
       <div class="review-card reveal">
         <div class="review-stars">★★★★★</div>
         <p class="review-text">
-          GPT를 거의 매일 사용하는데 매번 챗지 헙박하느라 정신 없었던 것 같아요. 원하지 않는 답이 나올 때 진짜 이이가 없는 명령이로 헙박 했는데 기본 정보부터 수정되야 하고 구체적으로 대답한다는 가장 기본 프로세스부터 친절히 접근하여 알려주셨어요. AI? 안 쓰면 뒤쳐진대~ 근데 어떻게 써? 그 방법을 A부터 Z까지 아주 자세하게 알려주셨어요. <strong>설명이 넘 간단하고 이해쏙쏙 잘 되어서 딱 한번만 들어도 직관적으로 바로 몸이 움직여 따라하는 저를 발견했도 됩니다.</strong> 단순 텍스트 결과물에서 벗어나 머리속에 있는 것을 구체화 시키고 더 좋은 아이디어를 얻을 수 있는 다양함을 경험할 수 있어 한끝차이가 매우 중요함을 느꼈어요. 강의 신청한 나 너무 칭찬합니다.
+          GPT를 거의 매일 사용하는데 매번 챗지피티 헙박하느라 정신 없었던 것 같아요. 원하지 않는 답이 나올 때 진짜 밑도끝도 없이 헙박만 했는데, 기본 정보부터 수정되야 하고 구체적으로 대답한다는 가장 기본 프로세스부터 친절히 접근하여 알려주셨어요. AI? 안 쓰면 뒤쳐진대~ 근데 어떻게 써? 그 방법을 A부터 Z까지 아주 자세하게 알려주셨어요. <strong>설명이 넘 간단하고 이해쏙쏙 잘 되어서 딱 한번만 들어도 직관적으로 바로 몸이 움직여 따라하는 저를 발견했도 됩니다.</strong> 단순 텍스트 결과물에서 벗어나 머리속에 있는 것을 구체화 시키고 더 좋은 아이디어를 얻을 수 있는 다양함을 경험할 수 있어 한끝차이가 매우 중요함을 느꼈어요. 강의 신청한 나 너무 칭찬합니다.
         </p>
         <div class="review-author">박지** · 병원 대표</div>
       </div>
@@ -827,7 +844,7 @@
       <div class="review-card reveal">
         <div class="review-stars">★★★★★</div>
         <p class="review-text">
-          지원쌤 선생님의 AI 자동화 강의를 들으면서, 나 혼자 하던 수많은 수작업들이 정말 많이 줄어들 수 있다는 걸 처음 실감했다. ChatGPT, Claude, Gemini, NotebookLM 같은 도구들을 어떻게 활용해야 하는지 막막했는데, <strong>직접 시연해주시고 바로 따라할 수 있는 프롬프트까지 알려주셔서 훨씬 쉽게 다가갈 수 있었다.</strong> 이제는 마치 비서 두 명을 둔 것처럼 일할 수 있게 되었다. 아직은 소규모 공부방이지만, 대형 학원 시스템 못지않게 효율적으로 일할 수 있는 기반을 갖춘 것 같다. 막연했던 자동화가 나에게도 가능하다는 걸 알게 해준 강의.
+          지원쌤 선생님의 AI 자동화 강의를 들으면서, 나 혼자 하던 수많은 수작업들이 정말 많이 줄어들 수 있다는 걸 처음 실감했다. ChatGPT, Claude, Gemini, NotebookLM 같은 도구들을 어떻게 활용해야 하는지 막막했는데, <strong>직접 시연해주시고 바로 따라할 수 있는 프롬프트까지 알려주셔서 훨씬 쉽게 다가갈 수 있었다.</strong> 이제는 마치 비서 두 명을 둔 것처럼 일할 수 있게 되었다. 아직은 소규모 공부방이지만, 대형 학원 시스템 못지않게 효율적으로 일할 수 있는 기반을 갖춘 것 같다. <strong>막연했던 자동화가 나에게도 가능하다는 걸 알게 해준 강의.</strong>
         </p>
         <div class="review-author">류연** · 공부방 원장</div>
       </div>
@@ -835,7 +852,7 @@
       <div class="review-card reveal">
         <div class="review-stars">★★★★★</div>
         <p class="review-text">
-          정말 멍불허전! 이런 혜자스러운 강의는 다시 못해주신다고 자신하신만큼 와우와우! 탄성이 쏟아져나오는 강의었어요~ 바로 딸깍할 수 있는 Chat GPT 프롬프트만도 대단한데, Notebokok LM과 Claude 활용까지 함께 알려주셔서, <strong>학원업무에 깨알같이 사용할 수 있어, 만드는 프롬프팅을 신청했어요!!!</strong> 정말 제게 딱 맞는 세미나를 만났어요~ 특히, 설명 만들고 직접 해보지 않으면, '내것화'하기 이려운데, 마지막에 실습으로 궁금증도 해결해주셔서 너무 감사했이요~
+          <strong>정말 명불허전! 이런 혜자스러운 강의는 다시 못해주신다고 자신하신만큼 와우와우! 탄성이 쏟아져나오는 강의었어요~</strong> 바로 딸깍할 수 있는 Chat GPT 프롬프트만도 대단한데, Notebokok LM과 Claude 활용까지 함께 알려주셔서, 학원업무에 깨알같이 사용할 수 있어서!!! 정말 제게 딱 맞는 세미나를 만났어요~ 특히, 설명 만들고 직접 해보지 않으면, '내것화'하기 이려운데, 마지막에 실습으로 궁금증도 해결해주셔서 너무 감사했이요~
         </p>
         <div class="review-author">황지** · 학원 원장</div>
       </div>
@@ -843,7 +860,7 @@
       <div class="review-card reveal">
         <div class="review-stars">★★★★★</div>
         <p class="review-text">
-          딩~하게 뒷통수 맞은 지원쌤의 AI 강의. 이 강의를 안 들었으면 전 여전히 구시대 사람의 마인드로 살아갈뻔했어요. 그냥 혼자서 차근차근 학원 업무를 처리하면 되는 거지 굳이 배울 필요가 없을줄 알았고, 뭐가 문제인지 생각했는데 정말 문제없었네요. 몇 시간, 때론 며칠을 걸려 해결할 문제들도 <strong>이렇게 순식간에 처리된다고? 언제 이렇게 기술이 발전한 걸까요?!</strong> 정말 놀라움의 연속이었습니다. 계속 복습해서 제 것으로 잘 만들어가겠습니다.
+          <strong>딩~하게 뒷통수 맞은 지원쌤의 AI 강의.</strong> 이 강의를 안 들었으면 전 여전히 구시대 사람의 마인드로 살아갈 뻔했어요. 그냥 혼자서 차근차근 학원 업무를 처리하면 되는 거지 굳이 배울 필요가 없을줄 알았고, 뭐가 문제인지 생각했는데 정말 문제없었네요. 몇 시간, 때론 며칠을 걸려 해결할 문제들도 <strong>이렇게 순식간에 처리된다고? 언제 이렇게 기술이 발전한 걸까요?!</strong> 정말 놀라움의 연속이었습니다. 계속 복습해서 제 것으로 잘 만들어가겠습니다.
         </p>
         <div class="review-author">박은** · 학원 원장</div>
       </div>
@@ -851,7 +868,7 @@
       <div class="review-card reveal">
         <div class="review-stars">★★★★★</div>
         <p class="review-text">
-          챗 지피티를 즐겨 사용하곤 했지만, 느낌대로 사용하고 있었습니다. 제대로 배워 본적은 없어서 뭔가 이 배후에(?) 있는 지식들과 활용점들을 알고싶다고 막연하게 생각만 하고 있었어요. 내 머릿속에만 있는 것을 내가 정리하고 자료화 하는데에 엄청난 시간이 들고 한계에 부딪혀 결국 타협해서 이 정도까지만 하자... 할 때가 있는게 사실인데 <strong>오늘 이 귀한 강의를 통해 앞으로 양질의 자료들을 요리조리 만들어볼 수 있음에 설레고 기쁩니다!!</strong> 처음 들어봐 유용한 AI 툴도 알게 되고, 사용해보는데 느낌이 좋~~습니다!
+          챗지피티를 즐겨 사용하곤 했지만, 느낌대로 사용하고 있었습니다. 제대로 배워 본적은 없어서 뭔가 이 배후에(?) 있는 지식들과 활용점들을 알고싶다고 막연하게 생각만 하고 있었어요. 내 머릿속에만 있는 것을 내가 정리하고 자료화 하는데에 엄청난 시간이 들고 한계에 부딪혀 결국 타협해서 이 정도까지만 하자... 할 때가 있는게 사실인데 <strong>오늘 이 귀한 강의를 통해 앞으로 양질의 자료들을 요리조리 만들어볼 수 있음에 설레고 기쁩니다!!</strong> 처음 들어봐 유용한 AI 툴도 알게 되고, 사용해보는데 느낌이 좋~~습니다!
         </p>
         <div class="review-author">송혜** · 요식업 대표</div>
       </div>
@@ -859,7 +876,7 @@
       <div class="review-card reveal">
         <div class="review-stars">★★★★★</div>
         <p class="review-text">
-          딸각 하나로 워크북만들기, 학부모CS 상담까지 간편하게 할수 있어서 정말 좋았어요! <strong>이마이마한 프롬프트를 받으니 든든한 비서 10명 둔 기분입니다!!</strong>
+          진짜 2시간 내내 우와~ 해서 지금 턱이 아파요. 딸각 하나로 워크북만들기, 학부모CS 상담까지 간편하게 할수 있어서 정말 좋았어요! <strong>이마이마한 프롬프트를 받으니 든든한 비서 10명 둔 기분입니다!!</strong>
         </p>
         <div class="review-author">이유** · 학원 원장</div>
       </div>
@@ -888,19 +905,21 @@
       </div>
       <ul class="include-list">
         <li>사전 설문으로 사장님 업무 미리 파악하고 시작</li>
-        <li>90분 전 과정 녹화본 제공 (복습 가능)</li>
+        <li>120분 전 과정 녹화본 제공 (복습 가능)</li>
         <li>맞춤 프롬프트 + AI 활용 루틴 정리본 PDF</li>
         <li>수업 후 1주일 이내 카카오 질문 무제한</li>
       </ul>
       <a href="https://smartstore.naver.com/daeunon/products/13241286917" class="btn-white" target="_blank">
         지금 신청하기 →
       </a>
+      <a href="https://open.kakao.com/o/swpZanli" target="_blank" class="btn-kakao-pricing">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" style="flex-shrink:0;"><path d="M12 3C6.477 3 2 6.477 2 10.5c0 2.607 1.554 4.908 3.938 6.315L4.5 21l4.656-2.328A11.61 11.61 0 0012 18c5.523 0 10-3.477 10-7.5S17.523 3 12 3z"/></svg>
+        카카오톡으로 문의하기
+      </a>
       <p class="limit-note">* 결제 후 24시간 내 연락드립니다</p>
     </div>
   </div>
 </section>
-
-
 
 <footer>
   <p>© 지원쌤 AI 교육 | 문의: 카카오 채널</p>
@@ -908,10 +927,9 @@
 </footer>
 
 <script>
-  // Scroll reveal
   const reveals = document.querySelectorAll('.reveal');
   const observer = new IntersectionObserver((entries) => {
-    entries.forEach((entry, i) => {
+    entries.forEach((entry) => {
       if (entry.isIntersecting) {
         setTimeout(() => {
           entry.target.classList.add('visible');
